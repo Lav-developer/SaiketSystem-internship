@@ -4,33 +4,27 @@ import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-// Task class representing a single to-do item
 public class to_do {
     private String title;
     private boolean isComplete;
 
-    // Constructor
     public to_do(String title) {
         this.title = title;
-        this.isComplete = false; // new tasks are incomplete by default
+        this.isComplete = false; 
     }
 
-    // Getter for title
     public String getTitle() {
         return title;
     }
 
-    // Check if task is complete
     public boolean isComplete() {
         return isComplete;
     }
 
-    // Mark task as complete
     public void markComplete() {
         this.isComplete = true;
     }
 
-    // String representation for displaying
     @Override
     public String toString() {
         String status = isComplete ? "[✓]" : "[ ]";
@@ -38,7 +32,6 @@ public class to_do {
     }
 }
 
-// Main application class
 class TodoListApp {
     private ArrayList<to_do> tasks;
     private Scanner scanner;
@@ -48,7 +41,6 @@ class TodoListApp {
         scanner = new Scanner(System.in);
     }
 
-    // Add a new task
     private void addTask() {
         System.out.print("Enter task title: ");
         String title = scanner.nextLine().trim();
@@ -61,17 +53,16 @@ class TodoListApp {
         System.out.println("Task added successfully.");
     }
 
-    // Mark a task as complete by its index
     private void markTaskComplete() {
         if (tasks.isEmpty()) {
             System.out.println("No tasks to mark. Please add a task first.");
             return;
         }
-        displayTasks(); // show current list with indices
+        displayTasks(); 
         System.out.print("Enter the task number to mark as complete: ");
         try {
             int index = scanner.nextInt();
-            scanner.nextLine(); // consume newline
+            scanner.nextLine();
             if (index >= 1 && index <= tasks.size()) {
                 to_do task = tasks.get(index - 1);
                 if (task.isComplete()) {
@@ -85,11 +76,10 @@ class TodoListApp {
             }
         } catch (InputMismatchException e) {
             System.out.println("Invalid input! Please enter a number.");
-            scanner.nextLine(); // clear invalid input
+            scanner.nextLine(); 
         }
     }
 
-    // Display all tasks with their status
     private void displayTasks() {
         if (tasks.isEmpty()) {
             System.out.println("Your to-do list is empty.");
@@ -102,7 +92,6 @@ class TodoListApp {
         }
     }
 
-    // Main menu and program flow
     public void run() {
         int choice = 0;
         System.out.println("=== Welcome to the To-Do List Application ===\n");
@@ -117,10 +106,10 @@ class TodoListApp {
 
             try {
                 choice = scanner.nextInt();
-                scanner.nextLine(); // consume newline
+                scanner.nextLine(); 
             } catch (InputMismatchException e) {
                 System.out.println("Invalid input! Please enter a number between 1 and 4.");
-                scanner.nextLine(); // clear invalid input
+                scanner.nextLine(); 
                 continue;
             }
 

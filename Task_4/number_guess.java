@@ -14,12 +14,10 @@ public class number_guess {
         scanner = new Scanner(System.in);
     }
 
-    // Generate a random number between MIN_RANGE and MAX_RANGE (inclusive)
     private int generateRandomNumber() {
         return random.nextInt(MAX_RANGE - MIN_RANGE + 1) + MIN_RANGE;
     }
 
-    // Play one round of the game
     private void playRound() {
         int secretNumber = generateRandomNumber();
         int attempts = 0;
@@ -49,12 +47,11 @@ public class number_guess {
                 }
             } catch (InputMismatchException e) {
                 System.out.println("Invalid input! Please enter a whole number.");
-                scanner.next(); // clear invalid token
+                scanner.next();
             }
         }
     }
 
-    // Main game loop – allows multiple rounds
     public void start() {
         System.out.println("=== Welcome to the Number Guessing Game ===");
         boolean keepPlaying = true;

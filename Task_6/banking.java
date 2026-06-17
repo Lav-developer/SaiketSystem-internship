@@ -3,16 +3,14 @@ import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-// Custom exception for insufficient funds
 class InsufficientFundsException extends Exception {
     public InsufficientFundsException(String message) {
         super(message);
     }
 }
 
-// Transaction class to record each transaction
 class Transaction {
-    private String type;      // "Deposit", "Withdrawal", "Interest"
+    private String type; 
     private double amount;
     private double balanceAfter;
 
@@ -28,7 +26,6 @@ class Transaction {
     }
 }
 
-// Abstract BankAccount class (base class for inheritance)
 abstract class BankAccount {
     private static int nextAccountNumber = 1001;
     protected int accountNumber;
@@ -53,7 +50,6 @@ abstract class BankAccount {
         transactionHistory.add(new Transaction(type, amount, balance));
     }
 
-    // Deposit method (common to all account types)
     public void deposit(double amount) throws IllegalArgumentException {
         if (amount <= 0) {
             throw new IllegalArgumentException("Deposit amount must be positive.");
@@ -62,7 +58,6 @@ abstract class BankAccount {
         recordTransaction("Deposit", amount);
     }
 
-    // Withdraw method (to be implemented by subclasses with specific rules)
     public abstract void withdraw(double amount) throws InsufficientFundsException, IllegalArgumentException;
 
     public double getBalance() {
@@ -95,9 +90,8 @@ abstract class BankAccount {
     }
 }
 
-// SavingsAccount subclass with interest and withdrawal limit
 class SavingsAccount extends BankAccount {
-    private static final double INTEREST_RATE = 0.03; // 3% per annum (simplified)
+    private static final double INTEREST_RATE = 0.03;
     private static final double WITHDRAWAL_LIMIT = 500.0;
 
     public SavingsAccount(String holderName, double initialDeposit) {
@@ -127,7 +121,6 @@ class SavingsAccount extends BankAccount {
     }
 }
 
-// Main Banking System class
 public class banking {
     private static ArrayList<BankAccount> accounts = new ArrayList<>();
     private static Scanner scanner = new Scanner(System.in);
@@ -157,7 +150,7 @@ public class banking {
                     viewTransactionHistory();
                     break;
                 case 6:
-                    applyInterestToSavings(); // optional feature
+                    applyInterestToSavings();
                     break;
                 case 7:
                     running = false;
@@ -188,7 +181,7 @@ public class banking {
                 return scanner.nextInt();
             } catch (InputMismatchException e) {
                 System.out.println("Invalid input. Please enter a number.");
-                scanner.next(); // clear invalid token
+                scanner.next();
             }
         }
     }
@@ -216,7 +209,7 @@ public class banking {
 
     private static void createAccount() {
         System.out.print("Enter account holder name: ");
-        scanner.nextLine(); // consume leftover newline
+        scanner.nextLine(); 
         String name = scanner.nextLine().trim();
         if (name.isEmpty()) {
             System.out.println("Name cannot be empty.");
